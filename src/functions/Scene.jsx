@@ -8,10 +8,12 @@ import { useFrame } from "@react-three/fiber";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 
-gsap.registerPlugin(useGSAP);
+// gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollTrigger);
 
-const Scene = ({ distance, namePass, canvasRef }) => {
+
+const Scene = ({ distance, namePass, canvasRef, num ,innerCan}) => {
+
   const meshRef = useRef();
   const scrollSpeed = useRef(0);
   const lastScroll = useRef(window.scrollY);
@@ -102,7 +104,10 @@ const Scene = ({ distance, namePass, canvasRef }) => {
             y: 0,
           });
 
-          
+          gsap.set(`.${innerCan}`,{
+            opacity:1
+          })
+
           ScrollTrigger.refresh();
           document.body.classList.remove("scroll-lock");
         },
@@ -117,36 +122,96 @@ const Scene = ({ distance, namePass, canvasRef }) => {
     //  ============================================= START
     if (!meshRef.current) return;
 
+    const innerEl = document.querySelector(`.${innerCan}`);
+    const secondChild2 = innerEl?.querySelector(":nth-child(1)");
+    const secondChild3 = innerEl?.querySelector(":nth-child(3)");
+
     const StartTL = gsap.timeline({
       scrollTrigger: {
         trigger: `.${namePass}`,
         start: "top 60%",
         end: "top -10%",
         scrub: true,
-        // markers: true,
+        // markers:true
       },
     });
-    StartTL.to(meshRef.current.scale, {
-      x: 1.4,
-      ease: "power2.inOut",
-    },'s1');
-  
+    StartTL.to(
+      meshRef.current.scale,
+      {
+        x: 1.4,
+        ease: "power2.inOut",
+      },
+      "s1"
+    );
+    StartTL.to(
+      `.${innerCan}`,
+      {
+        width:'90%',
+        ease: "power2.inOut",
+      },
+      "s1"
+    );
+    StartTL.to(
+      [secondChild2,secondChild3],
+      {
+        marginTop:'10%',
+        duration:2,
+        ease: "power2.inOut",
+      },
+      "s1"
+    );
+    if(namePass == 'Section1'){
+      StartTL.to('.BossVideo',{
+        opacity:0,
+        delay:0.7,
+        ease: "power2.inOut",
+      })
+    }
+    if(namePass == 'Section2'){
+      StartTL.to('.BossImg1',{
+        opacity:0,
+        delay:0.7,
+        duration:0.2,
+        ease: "power2.inOut",
+      })
+    }
+    if(namePass == 'Section3'){
+      StartTL.to('.BossImg2',{
+        opacity:0,
+        delay:0.7,
+        duration:0.2,
+        ease: "power2.inOut",
+      })
+    }
+
     // ============================================== End
 
-    const endTL = gsap.timeline({
+    const EndTL = gsap.timeline({
       scrollTrigger: {
         trigger: `.${namePass}`,
         start: "bottom 80%",
         end: "bottom 40%",
         scrub: true,
-        // markers: true,
+        // markers:true
       },
     });
-    endTL.to(meshRef.current.scale, {
-      x: 1,
-      ease: "power2.inOut",
-    },'e1');
-    
+    EndTL.to(
+      meshRef.current.scale,
+      {
+        x: 1,
+        ease: "power2.inOut",
+      },
+      "e1"
+    );
+     EndTL.to(
+      `.${innerCan}`,
+      {
+        width:'70%',
+        ease: "power2.inOut",
+      },
+      "e1"
+    );
+
   }, []);
 
   // ----------------------------------------------------------------------------- Detect Scroll Direction
@@ -163,14 +228,14 @@ const Scene = ({ distance, namePass, canvasRef }) => {
       if (delta > 0) {
         // scrolling down
         gsap.to(targetCross, {
-          current: -40,
+          current: -30,
           duration: 0.6,
           ease: "power3.out",
         });
       } else if (delta < 0) {
         // scrolling up
         gsap.to(targetCross, {
-          current: 40,
+          current: 30,
           duration: 0.6,
           ease: "power3.out",
         });

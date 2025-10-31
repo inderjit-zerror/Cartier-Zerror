@@ -3,6 +3,10 @@ import BlankCont from './BlankCont'
 import video2 from '/video2.mp4'
 
 const MainCont = () => {
+
+  const sections = ["Section1", "Section2", "Section3"]; // 👈 add more anytime
+  const inner = ['section1inner','section2inner','section3inner']
+
   return (
     <div className='w-full min-h-screen z-20 relative'>
 
@@ -21,7 +25,7 @@ const MainCont = () => {
       <div className='w-full h-[70dvh]  flex justify-center items-end'>
         <div className='w-[80%] h-fit  flex items-end'>
           {/* video-div ----------------- */}
-          <div className='w-[200px] h-[250px] max-2xl:w-[120px] max-2xl:h-[150px] bg-pink-500 overflow-hidden'>
+          <div className='w-[200px] h-[250px] max-2xl:w-[120px] max-2xl:h-[150px]  overflow-hidden'>
             <video className='w-full h-full object-cover' autoPlay loop muted src={video2}></video>
           </div>
 
@@ -39,15 +43,22 @@ const MainCont = () => {
 
         </div>
       </div>
-      <MainCanvas namePass="Section1"/>
+      {/* <MainCanvas namePass="Section1" num={0} />
 
       <BlankCont/>
-      <MainCanvas namePass="Section2"/>
+      <MainCanvas namePass="Section2" num={1} />
 
       <BlankCont/>
-      <MainCanvas namePass="Section3"/>
+      <MainCanvas namePass="Section3" num={2} />
       
-      <BlankCont/>
+      <BlankCont/> */}
+
+       {sections.map((name, index) => (
+        <div key={index} className={`Section${name}`}>
+          <MainCanvas namePass={name} innerCan={inner[index]} num={index} />
+          <BlankCont />
+        </div>
+      ))}
 
     </div>
   )
