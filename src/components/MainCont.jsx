@@ -5,7 +5,9 @@ import video2 from '/video2.mp4'
 const MainCont = () => {
 
   const sections = ["Section1", "Section2", "Section3"]; // 👈 add more anytime
-  const inner = ['section1inner','section2inner','section3inner']
+  const inner = ['section1inner','section2inner','section3inner'];
+  const inner1 = ['Cont1Inner1', 'Cont1Inner2', 'Cont1Inner3', ]
+  const inner2 = ['Cont2Inner1', 'Cont2Inner2', 'Cont2Inner3', ]
 
   return (
     <div className='w-full min-h-screen z-20 relative'>
@@ -55,7 +57,7 @@ const MainCont = () => {
 
        {sections.map((name, index) => (
         <div key={index} className={`Section${name}`}>
-          <MainCanvas namePass={name} innerCan={inner[index]} num={index} />
+          <MainCanvas namePass={name} innerCan={inner[index]} innerPart1={inner1[index]} innerPart2={inner2[index]}  num={index} />
           <BlankCont />
         </div>
       ))}

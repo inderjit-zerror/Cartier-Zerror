@@ -11,9 +11,7 @@ import Lenis from "lenis";
 // gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollTrigger);
 
-
-const Scene = ({ distance, namePass, canvasRef, num ,innerCan}) => {
-
+const Scene = ({ distance, namePass, canvasRef, num, innerCan, innerPart1, innerPart2 }) => {
   const meshRef = useRef();
   const scrollSpeed = useRef(0);
   const lastScroll = useRef(window.scrollY);
@@ -104,10 +102,11 @@ const Scene = ({ distance, namePass, canvasRef, num ,innerCan}) => {
             y: 0,
           });
 
-          gsap.set(`.${innerCan}`,{
-            opacity:1
-          })
-
+          
+          gsap.set(`.${innerCan}`, {
+            opacity: 1,
+          });
+          
           ScrollTrigger.refresh();
           document.body.classList.remove("scroll-lock");
         },
@@ -123,8 +122,19 @@ const Scene = ({ distance, namePass, canvasRef, num ,innerCan}) => {
     if (!meshRef.current) return;
 
     const innerEl = document.querySelector(`.${innerCan}`);
-    const secondChild2 = innerEl?.querySelector(":nth-child(1)");
-    const secondChild3 = innerEl?.querySelector(":nth-child(3)");
+    const innerpart1 = document.querySelector(`.${innerPart1}`);
+    const firstChild1 = innerpart1?.querySelector(":nth-child(1)");
+    const firstChild2 = innerpart1?.querySelector(":nth-child(2)");
+
+    // get the <p> inside the first child
+const pTag = firstChild1?.querySelector("p");
+const hTag = firstChild2?.querySelector("h2");
+
+    const innerpart2 = document.querySelector(`.${innerPart2}`);
+    // const inn2nn = innerEl.querySelector(`:nth-child(1)`);
+    const secondChild2 = innerpart2?.querySelector(":nth-child(1)");
+    const secondChild3 = innerpart2?.querySelector(":nth-child(3)");
+
 
     const StartTL = gsap.timeline({
       scrollTrigger: {
@@ -139,7 +149,7 @@ const Scene = ({ distance, namePass, canvasRef, num ,innerCan}) => {
       meshRef.current.scale,
       {
         x: 1.4,
-        duration:4,
+        duration: 4,
         ease: "none",
       },
       "s1"
@@ -147,44 +157,64 @@ const Scene = ({ distance, namePass, canvasRef, num ,innerCan}) => {
     StartTL.to(
       `.${innerCan}`,
       {
-        width:'90%',
-        duration:4,
+        width: "90%",
+        duration: 4,
         ease: "none",
       },
       "s1"
     );
     StartTL.to(
-      [secondChild2,secondChild3],
+      [secondChild2, secondChild3],
       {
-        marginTop:'10%',
-        duration:2,
+        marginTop: "10%",
+        delay:2,
+        duration: 2,
         ease: "none",
       },
       "s1"
     );
-    if(namePass == 'Section1'){
-      StartTL.to('.BossVideo',{
-        opacity:0,
-        delay:0.7,
+    StartTL.to(
+      innerpart2,
+      {
+        paddingTop: "180px",
+        duration: 2,
+        ease:'linear',
+      },
+      "s1"
+    );
+    StartTL.to(
+      [pTag, hTag],
+      {
+        y: "0%",
+        duration: 2,
         ease: "none",
-      })
-    }
-    if(namePass == 'Section2'){
-      StartTL.to('.BossImg1',{
-        opacity:0,
-        delay:0.7,
-        duration:0.2,
+      },
+      "s1"
+    );
+    if (namePass == "Section1") {
+      StartTL.to(".BossVideo", {
+        opacity: 0,
+        delay: 0.7,
         ease: "none",
-      })
+      });
     }
-    if(namePass == 'Section3'){
-      StartTL.to('.BossImg2',{
-        opacity:0,
-        delay:0.7,
-        duration:0.2,
+    if (namePass == "Section2") {
+      StartTL.to(".BossImg1", {
+        opacity: 0,
+        delay: 0.7,
+        duration: 0.2,
         ease: "none",
-      })
+      });
     }
+    if (namePass == "Section3") {
+      StartTL.to(".BossImg2", {
+        opacity: 0,
+        delay: 0.7,
+        duration: 0.2,
+        ease: "none",
+      });
+    }
+
 
     // ============================================== End
 
@@ -201,21 +231,20 @@ const Scene = ({ distance, namePass, canvasRef, num ,innerCan}) => {
       meshRef.current.scale,
       {
         x: 1,
-        duration:1.5,
+        duration: 1.5,
         ease: "none",
       },
       "e1"
     );
-     EndTL.to(
+    EndTL.to(
       `.${innerCan}`,
       {
-        width:'70%',
-        duration:1.5,
+        width: "70%",
+        duration: 1.5,
         ease: "none",
       },
       "e1"
     );
-
   }, []);
 
   // ----------------------------------------------------------------------------- Detect Scroll Direction
