@@ -139,7 +139,8 @@ const Scene = ({ distance, namePass, canvasRef, num ,innerCan}) => {
       meshRef.current.scale,
       {
         x: 1.4,
-        ease: "power2.inOut",
+        duration:4,
+        ease: "none",
       },
       "s1"
     );
@@ -147,7 +148,8 @@ const Scene = ({ distance, namePass, canvasRef, num ,innerCan}) => {
       `.${innerCan}`,
       {
         width:'90%',
-        ease: "power2.inOut",
+        duration:4,
+        ease: "none",
       },
       "s1"
     );
@@ -156,7 +158,7 @@ const Scene = ({ distance, namePass, canvasRef, num ,innerCan}) => {
       {
         marginTop:'10%',
         duration:2,
-        ease: "power2.inOut",
+        ease: "none",
       },
       "s1"
     );
@@ -164,7 +166,7 @@ const Scene = ({ distance, namePass, canvasRef, num ,innerCan}) => {
       StartTL.to('.BossVideo',{
         opacity:0,
         delay:0.7,
-        ease: "power2.inOut",
+        ease: "none",
       })
     }
     if(namePass == 'Section2'){
@@ -172,7 +174,7 @@ const Scene = ({ distance, namePass, canvasRef, num ,innerCan}) => {
         opacity:0,
         delay:0.7,
         duration:0.2,
-        ease: "power2.inOut",
+        ease: "none",
       })
     }
     if(namePass == 'Section3'){
@@ -180,7 +182,7 @@ const Scene = ({ distance, namePass, canvasRef, num ,innerCan}) => {
         opacity:0,
         delay:0.7,
         duration:0.2,
-        ease: "power2.inOut",
+        ease: "none",
       })
     }
 
@@ -199,7 +201,8 @@ const Scene = ({ distance, namePass, canvasRef, num ,innerCan}) => {
       meshRef.current.scale,
       {
         x: 1,
-        ease: "power2.inOut",
+        duration:1.5,
+        ease: "none",
       },
       "e1"
     );
@@ -207,7 +210,8 @@ const Scene = ({ distance, namePass, canvasRef, num ,innerCan}) => {
       `.${innerCan}`,
       {
         width:'70%',
-        ease: "power2.inOut",
+        duration:1.5,
+        ease: "none",
       },
       "e1"
     );
@@ -228,14 +232,14 @@ const Scene = ({ distance, namePass, canvasRef, num ,innerCan}) => {
       if (delta > 0) {
         // scrolling down
         gsap.to(targetCross, {
-          current: -30,
+          current: -15,
           duration: 0.6,
           ease: "power3.out",
         });
       } else if (delta < 0) {
         // scrolling up
         gsap.to(targetCross, {
-          current: 30,
+          current: 15,
           duration: 0.6,
           ease: "power3.out",
         });
@@ -246,10 +250,10 @@ const Scene = ({ distance, namePass, canvasRef, num ,innerCan}) => {
       timeoutId = setTimeout(() => {
         gsap.to(targetCross, {
           current: 0,
-          duration: 1,
-          ease: "power3.out",
+          duration: 0.6,
+          ease: "power2.out",
         });
-      }, 15);
+      }, 10);
     };
 
     window.addEventListener("scroll", handleScroll);

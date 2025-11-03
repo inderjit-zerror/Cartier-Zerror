@@ -36,7 +36,7 @@ const MainCanvas = ({ namePass, num, innerCan}) => {
           </Canvas>
 
           {/* Canvas Top Image */}
-          <div className={`w-[70%] h-[75%] ${innerCan} absolute top-[15%] opacity-0 left-[50%] flex gap-[20px] justify-center translate-x-[-50%] `}>
+          <div className={`w-[70%] h-fit ${innerCan} absolute top-[20%] opacity-0 left-[50%] flex gap-[20px] justify-center translate-x-[-50%] `}>
 
             <div className="w-1/5 h-[50%] overflow-hidden">
                 <img src={user1} alt="" />
